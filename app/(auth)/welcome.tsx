@@ -14,6 +14,9 @@ const WelcomeUser = () => {
   // current active tile
   const [active, isActive] = useState(0);
 
+  // checking for last slide to automatically go to first and then loop
+  const isLastSlide = active === swipeMenu.length - 1;
+
   return (
     <SafeAreaView className="flex h-full items-center justify-between bg-white">
       {/* skip btn */}
@@ -63,8 +66,17 @@ const WelcomeUser = () => {
         })}
       </Swiper>
 
+      {/* when clicked on button on last slide the button text changes to Continue and then sign up to continue */}
       {/* Next button */}
-      <Button btnText="Continue" className="w-11/12 mt-5 font-normal" />
+      <Button
+        btnText={isLastSlide ? "Get Started" : "Continue"}
+        onPress={() =>
+          isLastSlide
+            ? router.replace("/(auth)/sign-up")
+            : swiperRef.current?.scrollBy(1)
+        }
+        className="w-11/12 mt-5 font-normal"
+      />
     </SafeAreaView>
   );
 };

@@ -1,5 +1,6 @@
-import { ButtonProps } from "@/types/types";
 import { Text, TouchableOpacity } from "react-native";
+
+import { ButtonProps } from "@/types/types";
 
 /**
  *
@@ -52,13 +53,15 @@ const Button = ({
   IconLeft,
   IconRight,
   className = "",
+  ...props
 }: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`w-full rounded-full flex flex-row justify-center items-center shadow-lg shadow-neutral-500/95 ${getBgVariantStyle(
+      className={`w-full rounded-full p-3 flex flex-row justify-center items-center shadow-lg shadow-neutral-500/95 ${getBgVariantStyle(
         bgVariant
       )} ${className}`}
+      {...props}
     >
       {IconLeft && <IconLeft />}
       <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>
