@@ -1,9 +1,10 @@
 import { router } from "expo-router";
 import { useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 
+import Button from "@/components/Button";
 import { swipeMenu } from "@/constants/index";
 
 const WelcomeUser = () => {
@@ -27,7 +28,7 @@ const WelcomeUser = () => {
         </Text>
       </TouchableOpacity>
 
-      {/* swipe */}
+      {/* swipe menu*/}
       <Swiper
         ref={swiperRef}
         loop
@@ -36,15 +37,34 @@ const WelcomeUser = () => {
         activeDot={<View className="w-[32px] h-[4px] mx-1 bg-zinc-900" />}
         onIndexChanged={(idx) => isActive(idx)}
       >
+        {/* map swipe menu array */}
         {swipeMenu.map((item) => {
           const { id, title, image, description } = item;
           return (
-            <View key={id}>
-              <Text>{title}</Text>
+            <View key={id} className="flex items-center justify-center p-5">
+              <Image
+                source={image}
+                resizeMethod="scale"
+                resizeMode="contain"
+                className="w-full h-[250px]"
+              />
+
+              <View className="flex flex-row items-center justify-center w-full mt-10">
+                <Text className="text-gray-800 text-3xl font-bold mx-10 text-center">
+                  {title}
+                </Text>
+              </View>
+
+              <Text className="text-blue-300 text-base font-JakartaBold text-center text-[#858585] mx-10 mt-3">
+                {description}
+              </Text>
             </View>
           );
         })}
       </Swiper>
+
+      {/* Next button */}
+      <Button btnText="Continue" className="w-11/12 mt-5 font-normal" />
     </SafeAreaView>
   );
 };
