@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { styled } from "nativewind";
 import { useRef, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,51 +18,79 @@ const WelcomeUser = () => {
   // checking for last slide to automatically go to first and then loop
   const isLastSlide = active === swipeMenu.length - 1;
 
+  /**
+   * @description `StyledSafeAreaView` is wrapper for `SafeAreaView`
+   */
+  const StyledSafeAreaView = styled(SafeAreaView);
+
+  /**
+   * @description `StyledTouchableOpacity` is wrapper for `TouchableOpacity`
+   */
+  const StyledTouchableOpacity = styled(TouchableOpacity);
+
+  /**
+   * @description `StyledText` is wrapper for `Text`
+   */
+  const StyledText = styled(Text);
+
+  /**
+   * @description `StyledView` is wrapper for `View`
+   */
+  const StyledView = styled(View);
+
+  /**
+   * @description `StyledImage` is wrapper for `Image`
+   */
+  const StyledImage = styled(Image);
+
   return (
-    <SafeAreaView className="flex h-full items-center justify-between bg-white">
+    <StyledSafeAreaView className="flex h-full items-center justify-between bg-white">
       {/* skip btn */}
-      <TouchableOpacity
+      <StyledTouchableOpacity
         onPress={() => {
           router.replace("/(auth)/sign-up");
         }}
         className="w-full flex justify-end items-end p-5"
       >
-        <Text className="text-slate-800 text-lg hover:text-slate-500 rounded-md text-md font-JakartaBold">
+        <StyledText className="text-slate-800 text-lg hover:text-slate-500 rounded-md text-md font-JakartaBold">
           Skip
-        </Text>
-      </TouchableOpacity>
+        </StyledText>
+      </StyledTouchableOpacity>
 
       {/* swipe menu*/}
       <Swiper
         ref={swiperRef}
         loop
         dotColor="#f3aaff"
-        dot={<View className="w-[32px] h-[4px] mx-1 bg-zinc-500" />}
-        activeDot={<View className="w-[32px] h-[4px] mx-1 bg-zinc-900" />}
+        dot={<StyledView className="w-[32px] h-[4px] mx-1 bg-zinc-500" />}
+        activeDot={<StyledView className="w-[32px] h-[4px] mx-1 bg-zinc-900" />}
         onIndexChanged={(idx) => isActive(idx)}
       >
         {/* map swipe menu array */}
         {swipeMenu.map((item) => {
           const { id, title, image, description } = item;
           return (
-            <View key={id} className="flex items-center justify-center p-5">
-              <Image
+            <StyledView
+              key={id}
+              className="flex items-center justify-center p-5"
+            >
+              <StyledImage
                 source={image}
                 resizeMethod="scale"
                 resizeMode="contain"
                 className="w-full h-[250px]"
               />
 
-              <View className="flex flex-row items-center justify-center w-full mt-10">
-                <Text className="text-gray-800 text-3xl font-bold mx-10 text-center">
+              <StyledView className="flex flex-row items-center justify-center w-full mt-10">
+                <StyledText className="text-gray-800 text-3xl font-bold mx-10 text-center">
                   {title}
-                </Text>
-              </View>
+                </StyledText>
+              </StyledView>
 
-              <Text className="text-blue-300 text-base font-JakartaBold text-center text-[#858585] mx-10 mt-3">
+              <StyledText className="text-blue-300 text-base font-JakartaBold text-center mx-10 mt-3">
                 {description}
-              </Text>
-            </View>
+              </StyledText>
+            </StyledView>
           );
         })}
       </Swiper>
@@ -77,7 +106,7 @@ const WelcomeUser = () => {
         }
         className="w-11/12 mt-5 font-normal"
       />
-    </SafeAreaView>
+    </StyledSafeAreaView>
   );
 };
 
