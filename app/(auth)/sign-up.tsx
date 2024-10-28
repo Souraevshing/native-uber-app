@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import OAuthUser from "@/components/OAuthUser";
 import {
   StyledImage,
   StyledScrollView,
@@ -69,13 +70,14 @@ const SignUpUser = () => {
           secureTextEntry={true}
         />
         {/* Submit form button */}
-        <Button btnText="Sign Up" onPress={handleSignUp} className="mt-10" />
+        <Button btnText="Sign Up" onPress={handleSignUp} className="mt-2" />
 
         {/* Authenticate user using Google OAuth */}
+        <OAuthUser />
 
         <Link
           href="/sign-in"
-          className="text-lg text-center text-general-200 mt-10"
+          className="text-lg text-center text-general-200 mt-3"
         >
           <StyledText>Already have an account ?</StyledText>
           <StyledText className="text-primary-500 text-center">
