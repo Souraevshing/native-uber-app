@@ -1,15 +1,16 @@
-import { styled } from "nativewind";
 import {
-  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Text,
-  TextInput,
   TouchableWithoutFeedback,
-  View,
 } from "react-native";
 
+import {
+  StyledImage,
+  StyledText,
+  StyledTextInput,
+  StyledView,
+} from "@/components/index";
 import { InputFieldProps } from "@/types/types";
 
 /**
@@ -27,26 +28,6 @@ const Input = ({
   className,
   ...props
 }: InputFieldProps) => {
-  /**
-   * @description `StyledView` is wrapper for native `View` component
-   */
-  const StyledView = styled(View);
-
-  /**
-   * @description `StyledText` is wrapper for native `Text` component
-   */
-  const StyledText = styled(Text);
-
-  /**
-   * @description `StyledImage` is wrapper for `Image` component
-   */
-  const StyledImage = styled(Image);
-
-  /**
-   * @description `StyledTextInput` is wrapper for `TextInput` component
-   */
-  const StyledTextInput = styled(TextInput);
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}

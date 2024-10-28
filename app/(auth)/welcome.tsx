@@ -1,11 +1,15 @@
 import { router } from "expo-router";
-import { styled } from "nativewind";
 import { useRef, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 
 import Button from "@/components/Button";
+import {
+  StyledImage,
+  StyledSafeAreaView,
+  StyledText,
+  StyledTouchableOpacity,
+  StyledView,
+} from "@/components/index";
 import { swipeMenu } from "@/constants/index";
 
 const WelcomeUser = () => {
@@ -17,31 +21,6 @@ const WelcomeUser = () => {
 
   // checking for last slide to automatically go to first and then loop
   const isLastSlide = active === swipeMenu.length - 1;
-
-  /**
-   * @description `StyledSafeAreaView` is wrapper for `SafeAreaView`
-   */
-  const StyledSafeAreaView = styled(SafeAreaView);
-
-  /**
-   * @description `StyledTouchableOpacity` is wrapper for `TouchableOpacity`
-   */
-  const StyledTouchableOpacity = styled(TouchableOpacity);
-
-  /**
-   * @description `StyledText` is wrapper for `Text`
-   */
-  const StyledText = styled(Text);
-
-  /**
-   * @description `StyledView` is wrapper for `View`
-   */
-  const StyledView = styled(View);
-
-  /**
-   * @description `StyledImage` is wrapper for `Image`
-   */
-  const StyledImage = styled(Image);
 
   return (
     <StyledSafeAreaView className="flex h-full items-center justify-between bg-white">

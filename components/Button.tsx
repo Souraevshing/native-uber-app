@@ -1,6 +1,4 @@
-import { styled } from "nativewind";
-import { Text, TouchableOpacity } from "react-native";
-
+import { StyledText, StyledTouchableOpacity } from "@/components/index";
 import { ButtonProps } from "@/types/types";
 
 /**
@@ -56,16 +54,6 @@ const Button = ({
   className = "",
   ...props
 }: ButtonProps) => {
-  /**
-   * @description `StyledText` is wrapper for native `Text` component
-   */
-  const StyledText = styled(Text);
-
-  /**
-   * @description `StyledTouchableOpacity` is wrapper for native `TouchableOpacity` component
-   */
-  const StyledTouchableOpacity = styled(TouchableOpacity);
-
   return (
     <StyledTouchableOpacity
       onPress={onPress}
