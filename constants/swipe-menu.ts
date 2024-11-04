@@ -26,6 +26,7 @@ import selectedMarker from "@/assets/icons/selected-marker.png";
 import star from "@/assets/icons/star.png";
 import target from "@/assets/icons/target.png";
 import to from "@/assets/icons/to.png";
+import checkSuccess from "@/assets/images/check-success.gif";
 import check from "@/assets/images/check.png";
 import getStarted from "@/assets/images/get-started.png";
 import message from "@/assets/images/message.png";
@@ -45,6 +46,7 @@ export const images = {
   getStarted,
   signUpCar,
   check,
+  checkSuccess,
   noResult,
   message,
 };

@@ -12,7 +12,7 @@ import {
 } from "@/components/index";
 import { swipeMenu } from "@/constants/index";
 
-const WelcomeUser = () => {
+const OnboardUser = () => {
   // ref to track current state of swiper
   const swiperRef = useRef<Swiper>(null);
 
@@ -31,7 +31,7 @@ const WelcomeUser = () => {
         }}
         className="w-full flex justify-end items-end p-5"
       >
-        <StyledText className="text-slate-800 text-lg hover:text-slate-500 rounded-md text-md font-JakartaBold">
+        <StyledText className="text-slate-800 text-base hover:text-slate-500 rounded-md text-md font-JakartaBold">
           Skip
         </StyledText>
       </StyledTouchableOpacity>
@@ -39,7 +39,7 @@ const WelcomeUser = () => {
       {/* swipe menu*/}
       <Swiper
         ref={swiperRef}
-        loop
+        loop={true}
         dotColor="#f3aaff"
         dot={<StyledView className="w-[32px] h-[4px] mx-1 bg-zinc-500" />}
         activeDot={<StyledView className="w-[32px] h-[4px] mx-1 bg-zinc-900" />}
@@ -55,18 +55,17 @@ const WelcomeUser = () => {
             >
               <StyledImage
                 source={image}
-                resizeMethod="scale"
                 resizeMode="contain"
                 className="w-full h-[250px]"
               />
 
-              <StyledView className="flex flex-row items-center justify-center w-full mt-10">
+              <StyledView className="flex flex-row items-center justify-center w-full mt-5">
                 <StyledText className="text-gray-800 text-3xl font-bold mx-10 text-center">
                   {title}
                 </StyledText>
               </StyledView>
 
-              <StyledText className="text-blue-300 text-base font-JakartaBold text-center mx-10 mt-3">
+              <StyledText className="text-blue-300 text-base font-JakartaBold text-center mx-10 mt-5">
                 {description}
               </StyledText>
             </StyledView>
@@ -89,4 +88,4 @@ const WelcomeUser = () => {
   );
 };
 
-export default WelcomeUser;
+export default OnboardUser;
