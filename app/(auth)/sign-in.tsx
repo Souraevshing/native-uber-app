@@ -93,6 +93,7 @@ const SignInUser = () => {
         <Input
           label="Email"
           placeholder="Enter email"
+          autoFocus={true}
           icon={icons.email}
           value={form.email}
           textContentType="emailAddress"
@@ -102,6 +103,7 @@ const SignInUser = () => {
         <Input
           label="Password"
           placeholder="Enter password"
+          autoFocus={true}
           icon={icons.lock}
           value={form.password}
           textContentType="password"

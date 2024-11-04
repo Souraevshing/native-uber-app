@@ -1,15 +1,25 @@
-import { SignedIn, useUser } from "@clerk/clerk-expo";
-import { Text, View } from "react-native";
+import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
+
+import { StyledSafeAreaView, StyledText } from "@/components";
+import { Link } from "expo-router";
 
 const Home = () => {
   const { user } = useUser();
 
   return (
-    <View>
+    <StyledSafeAreaView>
       <SignedIn>
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
+        <StyledText>{user?.emailAddresses[0].emailAddress}</StyledText>
       </SignedIn>
-    </View>
+      <SignedOut>
+        <Link href={"/sign-in"}>
+          <StyledText>Sign In</StyledText>
+        </Link>
+        <Link href={"/sign-up"}>
+          <StyledText>Sign Up</StyledText>
+        </Link>
+      </SignedOut>
+    </StyledSafeAreaView>
   );
 };
 
