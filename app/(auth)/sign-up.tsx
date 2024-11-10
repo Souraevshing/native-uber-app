@@ -15,6 +15,7 @@ import {
   StyledView,
 } from "@/components/index";
 import { icons, images } from "@/constants/swipe-menu";
+import { fetchAPI } from "@/lib/fetch";
 
 /**
  * @description Register user and then login
@@ -108,6 +109,17 @@ const SignUpUser = () => {
         code,
       });
       if (signUpUser?.status === "complete") {
+        // fetch user after successful sign-up is done
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: signUpUser.createdUserId,
+          }),
+        });
+
+        // setting setActive with session object to new session id
         await setActive({ session: signUpUser.createdSessionId });
         setVerification({ ...verification, state: "success" });
       } else {
@@ -120,6 +132,11 @@ const SignUpUser = () => {
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
       Alert.alert("Verification failed", err.errors[0].longMessage);
+      setVerification({
+        ...verification,
+        error: "Verification failed",
+        state: "error",
+      });
     } finally {
       setVerifyCodeLoading(false); // Stop loading
     }

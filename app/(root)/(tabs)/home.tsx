@@ -8,9 +8,12 @@ const Home = () => {
 
   return (
     <StyledSafeAreaView>
+      {/* when user is logged in show this */}
       <SignedIn>
         <StyledText>{user?.emailAddresses[0].emailAddress}</StyledText>
       </SignedIn>
+
+      {/* when user is logged out show this */}
       <SignedOut>
         <Link href={"/sign-in"}>
           <StyledText>Sign In</StyledText>
