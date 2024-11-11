@@ -1,5 +1,7 @@
+import { Ride } from "@/types/types";
 import { styled } from "nativewind";
 import {
+  FlatList,
   Image,
   ScrollView,
   Text,
@@ -43,3 +45,8 @@ export const StyledImage = styled(Image);
  * @description `StyledScrollView` is wrapper for native `ScrollView` component
  */
 export const StyledScrollView = styled(ScrollView);
+
+/**
+ * @description `StyledFlatList` is wrapper for native `FlatList` component
+ */
+export const StyledFlatList = styled(FlatList<Ride>);

@@ -161,7 +161,6 @@ const SignUpUser = () => {
           icon={icons.person}
           value={form.name}
           textContentType="name"
-          autoFocus={true}
           onChangeText={(value) => setForm({ ...form, name: value })}
         />
         {/* Email */}
@@ -171,7 +170,6 @@ const SignUpUser = () => {
           icon={icons.email}
           value={form.email}
           textContentType="emailAddress"
-          autoFocus={true}
           onChangeText={(value) => setForm({ ...form, email: value })}
         />
         {/* Password */}
@@ -181,7 +179,6 @@ const SignUpUser = () => {
           icon={icons.lock}
           value={form.password}
           textContentType="password"
-          autoFocus={true}
           onChangeText={(value) => setForm({ ...form, password: value })}
           secureTextEntry={true}
         />

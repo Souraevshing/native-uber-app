@@ -93,7 +93,6 @@ const SignInUser = () => {
         <Input
           label="Email"
           placeholder="Enter email"
-          autoFocus={true}
           icon={icons.email}
           value={form.email}
           textContentType="emailAddress"
@@ -103,7 +102,6 @@ const SignInUser = () => {
         <Input
           label="Password"
           placeholder="Enter password"
-          autoFocus={true}
           icon={icons.lock}
           value={form.password}
           textContentType="password"
@@ -126,6 +124,18 @@ const SignInUser = () => {
         {/* Authenticate user using Google OAuth */}
         <OAuthUser />
 
+        {/* forgot password */}
+        <Link
+          href="/forgot-password"
+          className="text-lg text-center text-general-200 mt-5"
+        >
+          <StyledText className=" text-general-200">
+            Forgot password ?
+          </StyledText>
+          <StyledText className="text-primary-500"> Reset Password</StyledText>
+        </Link>
+
+        {/* sign up user */}
         <Link
           href="/sign-up"
           className="text-lg text-center text-general-200 mt-3"
