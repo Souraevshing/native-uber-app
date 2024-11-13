@@ -93,7 +93,7 @@ const Map = ({}: MapProps) => {
     <StyledMapView
       provider={PROVIDER_GOOGLE}
       tintColor="black"
-      mapType="standard"
+      mapType="mutedStandard"
       showsCompass={true}
       showsScale={true}
       showsPointsOfInterest={false}
@@ -109,10 +109,10 @@ const Map = ({}: MapProps) => {
       zoomControlEnabled={true}
       className="w-full h-full rounded-3xl"
     >
-      {markers.map((marker, id) => {
+      {markers.map((marker, _id) => {
         return (
           <Marker
-            key={id}
+            key={marker.id}
             coordinate={{
               latitude: marker.latitude,
               longitude: marker.longitude,
@@ -121,7 +121,7 @@ const Map = ({}: MapProps) => {
             image={
               selectedDriver === marker.id ? icons.selectedMarker : icons.marker
             }
-          ></Marker>
+          />
         );
       })}
     </StyledMapView>
