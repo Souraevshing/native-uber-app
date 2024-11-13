@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 /**
@@ -50,3 +51,8 @@ export const StyledScrollView = styled(ScrollView);
  * @description `StyledFlatList` is wrapper for native `FlatList` component
  */
 export const StyledFlatList = styled(FlatList<Ride>);
+
+/**
+ * @description `StyledMapView` is wrapper for native `MapView` component
+ */
+export const StyledMapView = styled(MapView);

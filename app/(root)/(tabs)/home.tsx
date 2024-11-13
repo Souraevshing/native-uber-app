@@ -1,9 +1,10 @@
 import { useClerk, useUser } from "@clerk/clerk-expo";
-import { useState } from "react";
+import * as Location from "expo-location";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 
-import GoogleSearchInput from "@/components/GoogleSearchInput";
-import RideCard from "@/components/RideCard";
+import Store from "@/app/store";
 import {
   StyledFlatList,
   StyledImage,
@@ -11,7 +12,10 @@ import {
   StyledText,
   StyledTouchableOpacity,
   StyledView,
-} from "@/components/index";
+} from "@/components";
+import GoogleSearchInput from "@/components/GoogleSearchInput";
+import Map from "@/components/Map";
+import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants/swipe-menu";
 import { Ride } from "@/types/types";
 
@@ -133,18 +137,54 @@ const Home = () => {
   // loading state
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  //logged in user details fetched from clerk
+  // logged in user details fetched from clerk
   const { isLoaded, isSignedIn, user } = useUser();
+
+  // get user current location and set destination from store
+  const { setUserLocation, setDestinationLocation } = Store();
+
+  // check if permission has been granted for location
+  const [hasPermission, setHasPermission] = useState<boolean>(false);
 
   const { signOut } = useClerk();
 
-  //sign out user on click
+  // sign out user on click
   const handleSignOut = async () => {
     await signOut();
+    router.push("/sign-in");
   };
 
-  //handle searching from list of rides
+  // handle searching from list of rides
   const handlePress = async () => {};
+
+  useEffect(() => {
+    const fetchUserLocation = async () => {
+      // get location permission from user
+      const requestLocation = async () => {
+        let { granted } = await Location.requestForegroundPermissionsAsync();
+
+        if (granted) {
+          setHasPermission(true);
+        }
+      };
+
+      // get current position i.e. latitudes and longitudes
+      let location = await Location.getCurrentPositionAsync();
+
+      const currentAddress = await Location.reverseGeocodeAsync({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+
+      setUserLocation({
+        address: `${currentAddress[0].name}, ${currentAddress[0].region}`,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+
+      requestLocation();
+    };
+  }, []);
 
   return (
     <StyledSafeAreaView className="flex-1">
@@ -192,16 +232,21 @@ const Home = () => {
                 </StyledTouchableOpacity>
               </StyledView>
 
-              {/* Google Search */}
+              {/*destination to go to */}
               <GoogleSearchInput
                 icon={icons.search}
-                containerStyle="bg-white shadow-sm shadow-neutral-500"
+                containerStyle="bg-white shadow-2xl shadow-neutral-500"
                 handlePress={handlePress}
               />
 
               <>
-                <StyledText>Current Location</StyledText>
-                <StyledView className="flex flex-row items-center bg-transparent h-[300px]"></StyledView>
+                <StyledText className="text-lg font-JakartaBold mt-5 mb-3">
+                  Current Location
+                </StyledText>
+                <StyledView className="flex flex-row items-center bg-transparent h-[300px]">
+                  {/* map showing the from and to distance */}
+                  <Map />
+                </StyledView>
               </>
             </>
           );
