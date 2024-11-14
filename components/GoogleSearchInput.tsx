@@ -97,7 +97,7 @@ const GoogleSearchInput = ({
           </StyledView>
         )}
         textInputProps={{
-          placeholder: initialLocation ? "Enter destination" : "Search here...",
+          placeholder: initialLocation && "Enter destination",
           placeholderTextColor: "gray",
           cursorColor: "blue",
           selectionColor: "black",

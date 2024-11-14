@@ -1,10 +1,10 @@
-import { useClerk, useUser } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 
-import Store from "@/app/store";
+import useLocationStore from "@/app/store";
 import {
   StyledFlatList,
   StyledImage,
@@ -135,55 +135,60 @@ const recentRides = [
  */
 const Home = () => {
   // loading state
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // logged in user details fetched from clerk
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { user } = useUser();
 
   // get user current location and set destination from store
-  const { setUserLocation, setDestinationLocation } = Store();
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
 
   // check if permission has been granted for location
   const [hasPermission, setHasPermission] = useState<boolean>(false);
 
-  const { signOut } = useClerk();
+  const { signOut } = useAuth();
 
   // sign out user on click
   const handleSignOut = async () => {
     await signOut();
-    router.push("/sign-in");
+    router.push("/(auth)/sign-in");
   };
 
   // handle searching from list of rides
-  const handlePress = async () => {};
+  const handlePress = async (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+
+    router.push("/(root)/find-rides");
+  };
 
   useEffect(() => {
-    const fetchUserLocation = async () => {
-      // get location permission from user
-      const requestLocation = async () => {
-        let { granted } = await Location.requestForegroundPermissionsAsync();
+    const requestLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
 
-        if (granted) {
-          setHasPermission(true);
-        }
-      };
+      if (status !== "granted") {
+        setHasPermission(false);
+        return;
+      }
 
-      // get current position i.e. latitudes and longitudes
-      let location = await Location.getCurrentPositionAsync();
+      let location = await Location.getCurrentPositionAsync({});
 
-      const currentAddress = await Location.reverseGeocodeAsync({
+      const address = await Location.reverseGeocodeAsync({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
 
       setUserLocation({
-        address: `${currentAddress[0].name}, ${currentAddress[0].region}`,
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
+        address: `${address[0].name}, ${address[0].region}`,
       });
-
-      requestLocation();
     };
+
+    requestLocation();
   }, []);
 
   return (
@@ -245,6 +250,7 @@ const Home = () => {
                 </StyledText>
                 <StyledView className="flex flex-row items-center bg-transparent h-[300px]">
                   {/* map showing the from and to distance */}
+
                   <Map />
                 </StyledView>
               </>

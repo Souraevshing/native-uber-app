@@ -1,9 +1,5 @@
 import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -11,6 +7,7 @@ import { useEffect } from "react";
 import "react-native-get-random-values";
 import "react-native-reanimated";
 
+import CustomDarkTheme from "@/app/themes/CustomDarkTheme";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { tokenCache } from "@/lib/auth";
 
@@ -50,7 +47,9 @@ export default function RootLayout() {
 
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeProvider
+        value={colorScheme === "dark" ? CustomDarkTheme : DefaultTheme}
+      >
         <ClerkLoaded>
           <Slot />
         </ClerkLoaded>
