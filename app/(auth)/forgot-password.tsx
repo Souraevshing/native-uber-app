@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 import { OtpInput } from "react-native-otp-entry";
 
+/**
+ * @description update password if by verifying code sent to email
+ */
 const ForgotPassword = () => {
   const [emailAddress, setEmailAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");

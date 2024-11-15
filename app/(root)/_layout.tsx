@@ -2,6 +2,9 @@ import { Stack } from "expo-router";
 
 import CustomDarkTheme from "../themes/CustomDarkTheme";
 
+/**
+ * @description main `layout` to add different `screens` or `tabs` to show when conditionally rendered
+ */
 const Layout = () => {
   return (
     <Stack
@@ -14,9 +17,9 @@ const Layout = () => {
       }}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(root)" options={{ headerShown: false }} /> */}
-      {/* <Stack.Screen name="(auth)" options={{ headerShown: false }} /> */}
+      <Stack.Screen name="find-rides" options={{ headerShown: false }} />
+      <Stack.Screen name="confirm-ride" options={{ headerShown: false }} />
+      <Stack.Screen name="book-ride" options={{ headerShown: false }} />
     </Stack>
   );
 };

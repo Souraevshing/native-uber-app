@@ -3,7 +3,7 @@ import { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
 import useLocationStore, { useDriverStore } from "@/app/store/index";
-import { StyledMapView } from "@/components/index";
+import { StyledMapView, StyledSafeAreaView } from "@/components/index";
 import { icons } from "@/constants/swipe-menu";
 import { calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { MapProps, MarkerData } from "@/types/types";
@@ -107,71 +107,74 @@ const Map = ({}: MapProps) => {
   }, [drivers, userLatitude, userLongitude]);
 
   return (
-    <StyledMapView
-      provider={PROVIDER_GOOGLE}
-      tintColor="black"
-      mapType="mutedStandard"
-      showsCompass={true}
-      showsScale={true}
-      showsPointsOfInterest={false}
-      showsUserLocation={true}
-      showsTraffic={true}
-      showsBuildings={true}
-      showsIndoorLevelPicker={true}
-      showsIndoors={true}
-      showsMyLocationButton={true}
-      userInterfaceStyle="dark"
-      zoomEnabled={true}
-      zoomTapEnabled={true}
-      zoomControlEnabled={true}
-      region={region}
-      className="w-full h-full rounded-3xl"
-    >
-      {markers.map((marker, _index) => {
-        return (
-          <Marker
-            key={marker.id}
-            coordinate={{
-              latitude: marker.latitude,
-              longitude: marker.longitude,
-            }}
-            title={marker.title}
-            image={
-              selectedDriver === +marker.id
-                ? icons.selectedMarker
-                : icons.marker
-            }
-          />
-        );
-      })}
+    <StyledSafeAreaView>
+      <StyledMapView
+        provider={PROVIDER_GOOGLE}
+        tintColor="black"
+        mapType="mutedStandard"
+        showsCompass={true}
+        showsScale={true}
+        showsPointsOfInterest={false}
+        showsUserLocation={true}
+        showsTraffic={true}
+        showsBuildings={true}
+        showsIndoorLevelPicker={true}
+        showsIndoors={true}
+        showsMyLocationButton={true}
+        userInterfaceStyle="dark"
+        zoomEnabled={true}
+        zoomTapEnabled={true}
+        zoomControlEnabled={true}
+        region={region}
+        className="w-full h-full rounded-3xl"
+      >
+        {markers.map((marker, _index) => {
+          return (
+            <Marker
+              key={marker.id}
+              coordinate={{
+                latitude: marker.latitude,
+                longitude: marker.longitude,
+              }}
+              title={marker.title}
+              image={
+                selectedDriver === +marker.id
+                  ? icons.selectedMarker
+                  : icons.marker
+              }
+            />
+          );
+        })}
 
-      {destinationLatitude && destinationLongitude && (
-        <>
-          <Marker
-            key="destination"
-            coordinate={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            title="Destination"
-            image={icons.pin}
-          />
-          <MapViewDirections
-            origin={{
-              latitude: userLatitude!,
-              longitude: userLongitude!,
-            }}
-            destination={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY!}
-            strokeColor="#0286FF"
-            strokeWidth={2}
-          />
-        </>
-      )}
-    </StyledMapView>
+        {destinationLatitude && destinationLongitude && (
+          <>
+            <Marker
+              key="destination"
+              coordinate={{
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+              }}
+              title="Destination"
+              image={icons.pin}
+            />
+            <MapViewDirections
+              origin={{
+                latitude: userLatitude!,
+                longitude: userLongitude!,
+              }}
+              destination={{
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+              }}
+              apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY!}
+              strokeColor="#0286FF"
+              strokeWidth={2}
+              timePrecision="now"
+            />
+          </>
+        )}
+      </StyledMapView>
+    </StyledSafeAreaView>
   );
 };
 

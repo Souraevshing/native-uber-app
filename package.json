@@ -18,6 +18,7 @@
     "@clerk/clerk-expo": "^2.2.29",
     "@expo/metro-runtime": "~3.2.3",
     "@expo/vector-icons": "^14.0.2",
+    "@gorhom/bottom-sheet": "^5.0.5",
     "@neondatabase/serverless": "^0.10.1",
     "@react-navigation/native": "^6.0.2",
     "expo": "~51.0.28",
@@ -54,14 +55,14 @@
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.0.7",
+    "eslint": "^8.57.0",
+    "eslint-config-expo": "~7.1.2",
     "jest": "^29.2.1",
     "jest-expo": "~51.0.3",
     "react-native-swiper": "^1.6.0",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "~5.3.3",
-    "eslint": "^8.57.0",
-    "eslint-config-expo": "~7.1.2"
+    "typescript": "~5.3.3"
   },
   "private": true
 }

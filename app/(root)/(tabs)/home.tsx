@@ -1,4 +1,5 @@
 import { useAuth, useUser } from "@clerk/clerk-expo";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
@@ -231,26 +232,30 @@ const Home = () => {
                 </StyledText>
                 <StyledTouchableOpacity
                   onPress={handleSignOut}
-                  className="justify-center items-center w-10 h-10 rounded-full bg-red-400"
+                  className="justify-center items-center w-10 h-10 rounded-full"
                 >
-                  <StyledImage source={icons.out} className="w-4 h-4" />
+                  <FontAwesome
+                    name="sign-out"
+                    size={24}
+                    role="button"
+                    color="#e63946"
+                  />
                 </StyledTouchableOpacity>
               </StyledView>
 
               {/*destination to go to */}
               <GoogleSearchInput
                 icon={icons.search}
-                containerStyle="bg-white shadow-2xl shadow-neutral-500"
+                containerStyle="bg-white"
                 handlePress={handlePress}
               />
 
               <>
                 <StyledText className="text-lg font-JakartaBold mt-5 mb-3">
-                  Current Location
+                  You're here
                 </StyledText>
                 <StyledView className="flex flex-row items-center bg-transparent h-[300px]">
                   {/* map showing the from and to distance */}
-
                   <Map />
                 </StyledView>
               </>

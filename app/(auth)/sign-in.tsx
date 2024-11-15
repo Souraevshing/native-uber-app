@@ -14,6 +14,9 @@ import Input from "@/components/Input";
 import OAuthUser from "@/components/OAuthUser";
 import { icons, images } from "@/constants/swipe-menu";
 
+/**
+ * @description `sign in` user
+ */
 const SignInUser = () => {
   /**
    * @description `initialState` form state at the start

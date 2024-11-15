@@ -25,40 +25,31 @@ const GoogleSearchInput = ({
         paddingHorizontal: 10,
         backgroundColor: "white",
         borderRadius: 9999,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
         shadowRadius: 5,
-        elevation: 4,
-        height: "10%",
       }}
     >
       <GooglePlacesAutocomplete
         fetchDetails={true}
-        placeholder="Enter destination"
+        placeholder={initialLocation ?? "Enter destination"}
         debounce={300}
         styles={{
           textInputContainer: {
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 9999,
+            borderRadius: 50,
             paddingVertical: 8,
-            paddingHorizontal: 15,
-            backgroundColor: textInputBackgroundColor || "white",
-            width: "100%",
+            paddingHorizontal: 16,
           },
           textInput: {
-            backgroundColor: textInputBackgroundColor || "white",
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: "500",
-            borderRadius: 9999,
-            paddingVertical: 10,
+            borderRadius: 50,
+            paddingVertical: 8,
             paddingHorizontal: 10,
+            color: "#1f2937", // Dark text for readability
           },
           listView: {
-            backgroundColor: textInputBackgroundColor || "white",
-            borderRadius: 9999,
-            zIndex: 99,
+            borderRadius: 10,
+            elevation: 4,
+            marginHorizontal: 10,
           },
         }}
         onPress={(data, details = null) => {
@@ -74,15 +65,16 @@ const GoogleSearchInput = ({
         }}
         renderLeftButton={() => (
           <StyledView
-            className="justify-center items-center bg-blue-500 mr-2"
             style={{
+              marginRight: 10,
               width: 40,
               height: 40,
               borderRadius: 20,
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "blue",
+              backgroundColor: "#4B5563", // Neutral gray for the icon container
               padding: 8,
+              elevation: 5,
             }}
           >
             <StyledImage
@@ -91,16 +83,15 @@ const GoogleSearchInput = ({
               style={{
                 width: 20,
                 height: 20,
-                tintColor: "#e9f5db",
+                tintColor: "#FFFFFF", // White icon for better visibility
               }}
             />
           </StyledView>
         )}
         textInputProps={{
-          placeholder: initialLocation && "Enter destination",
-          placeholderTextColor: "gray",
-          cursorColor: "blue",
-          selectionColor: "black",
+          placeholderTextColor: "#9CA3AF", // Subtle gray for placeholder
+          cursorColor: "#4B5563", // Neutral gray cursor
+          selectionColor: "#3B82F6", // Accent color for text selection
           inputMode: "text",
           blurOnSubmit: true,
           clearButtonMode: "always",

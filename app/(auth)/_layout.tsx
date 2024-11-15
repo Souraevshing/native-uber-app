@@ -1,5 +1,8 @@
 import { Stack } from "expo-router";
 
+/**
+ * @description layout for `Auth` screens
+ */
 const AuthLayout = () => {
   return (
     <Stack>

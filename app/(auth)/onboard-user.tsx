@@ -12,6 +12,9 @@ import {
 } from "@/components/index";
 import { swipeMenu } from "@/constants/index";
 
+/**
+ * @description main screen that is rendered after opening
+ */
 const OnboardUser = () => {
   // ref to track current state of swiper
   const swiperRef = useRef<Swiper>(null);
