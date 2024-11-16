@@ -1,6 +1,6 @@
 import { StyledImage, StyledText, StyledView } from "@/components/index";
 import { icons } from "@/constants/swipe-menu";
-import { formatDate, formatTime } from "@/lib/utils/formatDate";
+import { formatDate, formatTime } from "@/lib/utils";
 import { Ride } from "@/types/types";
 
 /**

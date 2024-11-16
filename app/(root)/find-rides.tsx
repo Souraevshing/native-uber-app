@@ -1,11 +1,11 @@
 import { router } from "expo-router";
 
-import useLocationStore from "@/app/store";
 import { StyledText, StyledView } from "@/components";
 import Button from "@/components/Button";
 import GoogleSearchInput from "@/components/GoogleSearchInput";
 import RidesLayout from "@/components/RidesLayout";
 import { icons } from "@/constants/swipe-menu";
+import { useLocationStore } from "@/store";
 
 /**
  * @description search `places` to go `destination`

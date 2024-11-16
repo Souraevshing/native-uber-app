@@ -1,8 +1,8 @@
 import { Tabs } from "expo-router";
+import { ImageSourcePropType } from "react-native";
 
 import { StyledImage, StyledView } from "@/components";
 import { icons } from "@/constants/swipe-menu";
-import { ImageSourcePropType } from "react-native";
 
 /**
  * @description `TabIcon` component for displaying icons for tabs

@@ -3,11 +3,9 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 
-import useLocationStore from "@/app/store";
 import {
-  StyledFlatList,
   StyledImage,
   StyledSafeAreaView,
   StyledText,
@@ -18,6 +16,7 @@ import GoogleSearchInput from "@/components/GoogleSearchInput";
 import Map from "@/components/Map";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants/swipe-menu";
+import { useLocationStore } from "@/store";
 import { Ride } from "@/types/types";
 
 /**
@@ -194,7 +193,7 @@ const Home = () => {
 
   return (
     <StyledSafeAreaView className="flex-1">
-      <StyledFlatList
+      <FlatList
         data={recentRides}
         renderItem={({ item }: { item: Ride }) => <RideCard item={item} />}
         keyboardShouldPersistTaps="handled"
@@ -202,7 +201,7 @@ const Home = () => {
           paddingBottom: 200,
           flexGrow: 1,
         }}
-        className="px-5"
+        style={{ padding: 20 }}
         // render when data prop is empty
         ListEmptyComponent={() => {
           return (

@@ -1,6 +1,5 @@
 import { styled } from "nativewind";
 import {
-  FlatList,
   Image,
   ScrollView,
   Text,
@@ -11,8 +10,6 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { Driver, MarkerData, Ride } from "@/types/types";
 
 /**
  * @description `StyledSafeAreaView` is wrapper for `SafeAreaView`
@@ -48,13 +45,6 @@ export const StyledImage = styled(Image);
  * @description `StyledScrollView` is wrapper for native `ScrollView` component
  */
 export const StyledScrollView = styled(ScrollView);
-
-/**
- * @description `StyledFlatList` is wrapper for native `FlatList` component
- */
-export const StyledFlatList = styled(
-  FlatList<Ride | Driver | MarkerData | any>
-);
 
 /**
  * @description `StyledMapView` is wrapper for native `MapView` component

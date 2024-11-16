@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
-import useLocationStore, { useDriverStore } from "@/app/store/index";
-import { StyledMapView, StyledSafeAreaView } from "@/components/index";
+import { StyledMapView } from "@/components/index";
 import { icons } from "@/constants/swipe-menu";
 import { calculateRegion, generateMarkersFromData } from "@/lib/map";
+import { useDriverStore, useLocationStore } from "@/store";
 import { MapProps, MarkerData } from "@/types/types";
 
 const drivers = [
@@ -20,6 +20,7 @@ const drivers = [
       "https://ucarecdn.com/a2dc52b2-8bf7-4e49-9a36-3ffb5229ed02/-/preview/465x466/",
     car_seats: 4,
     rating: 4.8,
+    time: 160,
   },
   {
     id: "2",
@@ -32,6 +33,7 @@ const drivers = [
       "https://ucarecdn.com/a3872f80-c094-409c-82f8-c9ff38429327/-/preview/930x932/",
     car_seats: 5,
     rating: 4.6,
+    time: 200,
   },
   {
     id: "3",
@@ -44,6 +46,7 @@ const drivers = [
       "https://ucarecdn.com/289764fb-55b6-4427-b1d1-f655987b4a14/-/preview/930x932/",
     car_seats: 4,
     rating: 4.7,
+    time: 60,
   },
   {
     id: "4",
@@ -56,6 +59,7 @@ const drivers = [
       "https://ucarecdn.com/b6fb3b55-7676-4ff3-8484-fb115e268d32/-/preview/930x932/",
     car_seats: 4,
     rating: 4.9,
+    time: 120,
   },
 ];
 
@@ -79,6 +83,8 @@ const Map = ({}: MapProps) => {
 
   // calculate driver car location and show as marker on the map
   useEffect(() => {
+    setDrivers(drivers);
+
     if (Array.isArray([drivers])) {
       if (!userLatitude || !userLongitude) {
         return;
@@ -107,74 +113,72 @@ const Map = ({}: MapProps) => {
   }, [drivers, userLatitude, userLongitude]);
 
   return (
-    <StyledSafeAreaView>
-      <StyledMapView
-        provider={PROVIDER_GOOGLE}
-        tintColor="black"
-        mapType="mutedStandard"
-        showsCompass={true}
-        showsScale={true}
-        showsPointsOfInterest={false}
-        showsUserLocation={true}
-        showsTraffic={true}
-        showsBuildings={true}
-        showsIndoorLevelPicker={true}
-        showsIndoors={true}
-        showsMyLocationButton={true}
-        userInterfaceStyle="dark"
-        zoomEnabled={true}
-        zoomTapEnabled={true}
-        zoomControlEnabled={true}
-        region={region}
-        className="w-full h-full rounded-3xl"
-      >
-        {markers.map((marker, _index) => {
-          return (
-            <Marker
-              key={marker.id}
-              coordinate={{
-                latitude: marker.latitude,
-                longitude: marker.longitude,
-              }}
-              title={marker.title}
-              image={
-                selectedDriver === +marker.id
-                  ? icons.selectedMarker
-                  : icons.marker
-              }
-            />
-          );
-        })}
+    <StyledMapView
+      provider={PROVIDER_GOOGLE}
+      tintColor="black"
+      mapType="mutedStandard"
+      showsCompass={true}
+      showsScale={true}
+      showsPointsOfInterest={false}
+      showsUserLocation={true}
+      showsTraffic={true}
+      showsBuildings={true}
+      showsIndoorLevelPicker={true}
+      showsIndoors={true}
+      showsMyLocationButton={true}
+      userInterfaceStyle="dark"
+      zoomEnabled={true}
+      zoomTapEnabled={true}
+      zoomControlEnabled={true}
+      region={region}
+      className="w-full h-full rounded-3xl"
+    >
+      {markers.map((marker, _index) => {
+        return (
+          <Marker
+            key={marker.id}
+            coordinate={{
+              latitude: marker.latitude,
+              longitude: marker.longitude,
+            }}
+            title={marker.title}
+            image={
+              selectedDriver === +marker.id
+                ? icons.selectedMarker
+                : icons.marker
+            }
+          />
+        );
+      })}
 
-        {destinationLatitude && destinationLongitude && (
-          <>
-            <Marker
-              key="destination"
-              coordinate={{
-                latitude: destinationLatitude,
-                longitude: destinationLongitude,
-              }}
-              title="Destination"
-              image={icons.pin}
-            />
-            <MapViewDirections
-              origin={{
-                latitude: userLatitude!,
-                longitude: userLongitude!,
-              }}
-              destination={{
-                latitude: destinationLatitude,
-                longitude: destinationLongitude,
-              }}
-              apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY!}
-              strokeColor="#0286FF"
-              strokeWidth={2}
-              timePrecision="now"
-            />
-          </>
-        )}
-      </StyledMapView>
-    </StyledSafeAreaView>
+      {destinationLatitude && destinationLongitude && (
+        <>
+          <Marker
+            key="destination"
+            coordinate={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            title="Destination"
+            image={icons.pin}
+          />
+          <MapViewDirections
+            origin={{
+              latitude: userLatitude!,
+              longitude: userLongitude!,
+            }}
+            destination={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY!}
+            strokeColor="#0286FF"
+            strokeWidth={2}
+            timePrecision="now"
+          />
+        </>
+      )}
+    </StyledMapView>
   );
 };
 

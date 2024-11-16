@@ -1,11 +1,11 @@
 import { router } from "expo-router";
+import { FlatList } from "react-native";
 
-import { useDriverStore } from "@/app/store";
-import { StyledFlatList, StyledView } from "@/components";
+import { StyledView } from "@/components";
 import Button from "@/components/Button";
 import DriverCard from "@/components/DriverCard";
 import RidesLayout from "@/components/RidesLayout";
-
+import { useDriverStore } from "@/store";
 /**
  * @description confirm ride after `source` and `destination` selection
  * @returns children as ReactNode
@@ -15,15 +15,17 @@ const ConfirmRide = () => {
 
   return (
     <RidesLayout snapPoints={["65%", "85%"]} title="Select driver">
-      <StyledFlatList
+      <FlatList
         data={drivers}
-        renderItem={({ item }) => (
-          <DriverCard
-            item={item}
-            selected={selectedDriver!}
-            setSelected={() => setSelectedDriver(item.id)}
-          />
-        )}
+        renderItem={({ item }) => {
+          return (
+            <DriverCard
+              item={item}
+              selected={selectedDriver!}
+              setSelected={() => setSelectedDriver(Number(item.id!))}
+            />
+          );
+        }}
         ListFooterComponent={() => {
           return (
             <StyledView className="mx-5 mt-10">
