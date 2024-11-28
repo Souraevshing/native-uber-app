@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { LogBox } from "react-native";
 import "react-native-get-random-values";
 import "react-native-reanimated";
 
@@ -13,6 +14,9 @@ import { tokenCache } from "@/lib/auth";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+// suppress warning messages
+LogBox.ignoreLogs(["Clerk:", "Warn:", "Warning:"]);
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

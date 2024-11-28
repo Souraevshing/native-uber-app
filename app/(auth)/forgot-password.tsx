@@ -50,6 +50,7 @@ const ForgotPassword = () => {
       await setActive!({ session: result.createdSessionId });
       router.replace("/sign-in");
     } catch (err: any) {
+      console.error(err);
       Alert.alert(err.errors[0].longMessage);
     }
   };

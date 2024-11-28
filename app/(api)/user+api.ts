@@ -4,6 +4,8 @@ const sql = neon(process.env.EXPO_PUBLIC_POSTGRES_DATABASE_URL!);
 
 /**
  * @description CREATE USER
+ * @param req Request
+ * @returns created user as response
  */
 export async function POST(req: Request) {
   try {

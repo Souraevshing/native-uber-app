@@ -29,8 +29,6 @@ const DriverCard = ({
   selected,
   setSelected,
 }: DriverCardProps) => {
-  console.log(time);
-
   return (
     <StyledTouchableOpacity
       onPress={setSelected}
@@ -60,7 +58,7 @@ const DriverCard = ({
         <StyledView className="flex flex-row items-center justify-start">
           {/* journey fare */}
           <StyledView className="flex flex-row items-center">
-            <StyledImage source={icons.dollar} className="w-4 h-4" />
+            <StyledImage source={icons.rupee} className="w-4 h-4" />
             <StyledText className="text-sm font-JakartaRegular ml-1">
               Rs{price}
             </StyledText>
@@ -72,7 +70,7 @@ const DriverCard = ({
 
           {/* time taken by driver to complete journey */}
           <StyledText className="text-sm font-JakartaRegular text-general-800">
-            {formatTime(time!)}
+            {formatTime(parseInt(`${time}`) || 5)}
           </StyledText>
 
           <StyledText className="text-sm font-JakartaRegular text-general-800 mx-1">

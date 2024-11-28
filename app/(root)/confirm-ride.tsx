@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import DriverCard from "@/components/DriverCard";
 import RidesLayout from "@/components/RidesLayout";
 import { useDriverStore } from "@/store";
+
 /**
  * @description confirm ride after `source` and `destination` selection
  * @returns children as ReactNode

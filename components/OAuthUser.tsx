@@ -1,11 +1,33 @@
+import { useOAuth } from "@clerk/clerk-expo";
+import { router } from "expo-router";
+import { useCallback } from "react";
+import { Alert } from "react-native";
+
 import { StyledImage, StyledText, StyledView } from "@/components/index";
 import { icons } from "@/constants/swipe-menu";
+import { googleOAuth } from "@/lib/auth";
 import Button from "./Button";
 
 const OAuthUser = () => {
-  const handleGoogleLogin = async () => {
-    console.log("logged in");
-  };
+  // start google oauth flow
+  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  // authenticate user if logged in already or first time user
+  const handleGoogleLogin = useCallback(async () => {
+    try {
+      const res = await googleOAuth(startOAuthFlow);
+
+      if (res.code === "session_exists" || res.code === "success") {
+        Alert.alert("Success", "Session already exists");
+        router.push("/(root)/(tabs)/home");
+      }
+
+      Alert.alert(res.success ? "success" : "error", res.message);
+    } catch (error) {
+      Alert.alert("Error", "Please login");
+      console.error(error);
+    }
+  }, [startOAuthFlow]);
 
   return (
     <StyledView>
